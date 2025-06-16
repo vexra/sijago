@@ -61,5 +61,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->role === 'student';
     }
+
+    /**
+     * Get the courses taught by the teacher.
+     */
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'teacher_id');
+    }
 }
 

@@ -38,6 +38,22 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        {{-- Tambahkan ini untuk Admin --}}
+                        @auth
+                            @if (Auth::user()->isAdmin())
+                                <x-dropdown-link :href="route('admin.dashboard')">
+                                    {{ __('Admin Dashboard') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.users.index')">
+                                    {{ __('Manajemen Pengguna') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.courses.index')">
+                                    {{ __('Manajemen Mata Pelajaran') }}
+                                </x-dropdown-link>
+                            @endif
+                        @endauth
+
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
