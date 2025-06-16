@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\AssignmentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,7 +56,22 @@ Route::middleware(['auth'])->group(function () {
     // Rute hanya untuk Guru
     Route::middleware(['role:teacher'])->group(function () {
         Route::get('/teacher/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
-        // Tambahkan rute guru lainnya
+
+        // Rute untuk Manajemen Materi Pembelajaran
+        Route::get('/teacher/materials', [MaterialController::class, 'index'])->name('teacher.materials.index');
+        Route::get('/teacher/materials/create', [MaterialController::class, 'create'])->name('teacher.materials.create');
+        Route::post('/teacher/materials', [MaterialController::class, 'store'])->name('teacher.materials.store');
+        Route::get('/teacher/materials/{material}/edit', [MaterialController::class, 'edit'])->name('teacher.materials.edit');
+        Route::patch('/teacher/materials/{material}', [MaterialController::class, 'update'])->name('teacher.materials.update');
+        Route::delete('/teacher/materials/{material}', [MaterialController::class, 'destroy'])->name('teacher.materials.destroy');
+
+        // Rute untuk Manajemen Tugas
+        Route::get('/teacher/assignments', [AssignmentController::class, 'index'])->name('teacher.assignments.index');
+        Route::get('/teacher/assignments/create', [AssignmentController::class, 'create'])->name('teacher.assignments.create');
+        Route::post('/teacher/assignments', [AssignmentController::class, 'store'])->name('teacher.assignments.store');
+        Route::get('/teacher/assignments/{assignment}/edit', [AssignmentController::class, 'edit'])->name('teacher.assignments.edit');
+        Route::patch('/teacher/assignments/{assignment}', [AssignmentController::class, 'update'])->name('teacher.assignments.update');
+        Route::delete('/teacher/assignments/{assignment}', [AssignmentController::class, 'destroy'])->name('teacher.assignments.destroy');
     });
 
     // Rute hanya untuk Siswa (bisa dilindungi atau tidak, tergantung kebutuhan)

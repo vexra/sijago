@@ -53,6 +53,20 @@
                             @endif
                         @endauth
 
+                        @auth
+                            @if (Auth::user()->isTeacher())
+                                <x-dropdown-link :href="route('teacher.dashboard')">
+                                    {{ __('Teacher Dashboard') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('teacher.materials.index')">
+                                    {{ __('Manajemen Materi') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('teacher.assignments.index')">
+                                    {{ __('Manajemen Tugas') }}
+                                </x-dropdown-link>
+                            @endif
+                        @endauth
+
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
