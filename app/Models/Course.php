@@ -27,4 +27,14 @@ class Course extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+     public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }
