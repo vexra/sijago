@@ -51,6 +51,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/courses/{course}/edit', [CourseController::class, 'edit'])->name('admin.courses.edit');
         Route::patch('/admin/courses/{course}', [CourseController::class, 'update'])->name('admin.courses.update');
         Route::delete('/admin/courses/{course}', [CourseController::class, 'destroy'])->name('admin.courses.destroy');
+
+        Route::get('/admin/student-courses', [AdminController::class, 'manageStudentCourses'])->name('admin.student_courses.index');
+        Route::post('/admin/student-courses/enroll', [AdminController::class, 'enrollStudent'])->name('admin.student_courses.enroll');
+        Route::post('/admin/student-courses/unenroll', [AdminController::class, 'unenrollStudent'])->name('admin.student_courses.unenroll');
+        Route::get('/admin/students/{student}/enrollments', [AdminController::class, 'showStudentEnrollments'])->name('admin.student_courses.show_enrollments');
+
     });
 
     // Rute hanya untuk Guru
