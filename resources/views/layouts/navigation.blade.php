@@ -67,6 +67,16 @@
                             @endif
                         @endauth
 
+                        @auth
+                            @if (Auth::user()->isStudent())
+                                <x-dropdown-link :href="route('student.dashboard')">
+                                    {{ __('Student Dashboard') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('student.courses.index')">
+                                    {{ __('Mata Pelajaran Saya') }}
+                                </x-dropdown-link>
+                            @endif
+                        @endauth
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

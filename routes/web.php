@@ -77,7 +77,14 @@ Route::middleware(['auth'])->group(function () {
     // Rute hanya untuk Siswa (bisa dilindungi atau tidak, tergantung kebutuhan)
     Route::middleware(['role:student'])->group(function () {
         Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
-        // Tambahkan rute siswa lainnya
+
+        // Rute untuk Mata Pelajaran yang Diikuti
+        Route::get('/student/my-courses', [StudentController::class, 'myCourses'])->name('student.courses.index');
+        Route::get('/student/courses/{course}', [StudentController::class, 'showCourse'])->name('student.courses.show');
+
+        // Rute untuk Tugas Siswa
+        Route::get('/student/assignments/{assignment}', [StudentController::class, 'showAssignment'])->name('student.assignments.show');
+        Route::post('/student/assignments/{assignment}/submit', [StudentController::class, 'submitAssignment'])->name('student.assignments.submit');
     });
 });
 

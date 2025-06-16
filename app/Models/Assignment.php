@@ -32,9 +32,8 @@ class Assignment extends Model
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
-    // Akan butuh relasi ke Submission (untuk pengumpulan tugas oleh siswa) nanti
-    // public function submissions()
-    // {
-    //     return $this->hasMany(Submission::class);
-    // }
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
+    }
 }
